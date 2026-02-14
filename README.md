@@ -1,3 +1,36 @@
+# 初回環境構築
+batファイルを実行してください
+```sh
+setup_intel_xpu.bat
+```
+
+# Ponyの学習テストサンプル
+Loraにつける名前を決めてください<br/>
+学習に使うモデルを用意してください。<br/>
+学習に使う画像ファイルをまとめて1フォルダにいれてください。
+
+## batファイルを使う場合
+まだ、webuiを調整していません。
+```sh
+pony_lora.bat
+```
+## 直接実行する場合
+myscript_pony.yamlを必ず書き換えてください
+```sh
+python run.py config/myscript_pony.yaml
+```
+
+# 私のテスト環境
+Arc B60で動作テストしてます
+<img width="993" height="266" alt="b60" src="https://github.com/user-attachments/assets/89f0449b-ca51-4a7a-9c78-d422cd8d6543" />
+
+<img width="1099" height="611" alt="test1" src="https://github.com/user-attachments/assets/9ed6aff6-153b-4b8d-bc72-bac60cf475c7" />
+
+<img width="1088" height="570" alt="test2" src="https://github.com/user-attachments/assets/3735e6fa-aed5-4b14-9f1a-84175d54fd2b" />
+
+
+
+
 # AI Toolkit by Ostris
 
 AI Toolkit is an all in one training suite for diffusion models. I try to support all the latest models on consumer grade hardware. Image and video models. It can be run as a GUI or CLI. It is designed to be easy to use but still have every feature imaginable.
