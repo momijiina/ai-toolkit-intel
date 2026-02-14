@@ -1,0 +1,59 @@
+job: extension
+config:
+# Lora名を下に記入してください
+  name: "my_pony_lora"
+  process:
+    - type: 'sd_trainer'
+      training_folder: "output"
+      device: "xpu"    # Intel Arc
+      
+      # ★モデル設定
+      model:
+        # ここにダウンロードしたPonyのファイルのパスを書いてください
+        name_or_path: "C:/Users/momijiina/Documents/ponyDiffusionV6XL_v6StartWithThisOne.safetensors"
+        
+        is_flux: false
+        is_xl: true
+        quantize: false
+        
+      # ネットワーク設定
+      network:
+        type: "lora"
+        linear: 16
+        linear_alpha: 16
+
+      # 学習設定
+      train:
+        batch_size: 1
+        steps: 1500
+        gradient_accumulation_steps: 1
+        train_unet: true
+        train_text_encoder: false
+        content_or_style: "balanced"
+        #optimizer: "adamw"
+        optimizer: "adafactor"
+        lr: 1e-4
+
+      # データセット設定
+      datasets:
+      # 画像フォルダのパスをここに記入してください
+        - folder_path: "C:/Users/momijiina/Documents/lora"
+          caption_ext: "txt"
+          caption_dropout_rate: 0.05
+          shuffle_tokens: false
+          cache_latents_to_disk: true
+          resolution: [1024, 1024]
+
+      # サンプル生成設定
+      sample:
+        sampler: "ddim"
+        sample_every: 100
+        width: 1024
+        height: 1024
+        prompts:
+          - "score_9, score_8_up, score_7_up, source_anime, simple background, 1girl, standing"
+        neg: "score_6, score_5, score_4"
+        seed: 42
+        walk_seed: true
+        guidance_scale: 7.0
+        sample_steps: 28
