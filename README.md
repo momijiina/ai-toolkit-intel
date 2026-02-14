@@ -1,4 +1,8 @@
 # 初回環境構築
+clone
+```sh
+git clone https://github.com/momijiina/ai-toolkit-intel.git
+```
 batファイルを実行してください
 ```sh
 setup_intel_xpu.bat
