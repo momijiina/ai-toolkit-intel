@@ -7,7 +7,7 @@ config:
       training_folder: "output"
       device: "xpu"    # Intel Arc
       
-      # ★モデル設定
+      # モデル設定
       model:
         # ここにダウンロードしたPonyのファイルのパスを書いてください
         name_or_path: "C:/Users/momijiina/Documents/ponyDiffusionV6XL_v6StartWithThisOne.safetensors"
