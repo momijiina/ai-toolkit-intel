@@ -1,3 +1,5 @@
+<img width="1097" height="431" alt="image" src="https://github.com/user-attachments/assets/aa492026-555c-4d29-aa17-8c3445152fec" />
+
 # 初回環境構築
 clone
 ```sh
