@@ -49,8 +49,11 @@ export interface CpuInfo {
   currentLoad: number;
 }
 
+export type GpuBackend = 'nvidia' | 'intel' | 'none';
+
 export interface GPUApiResponse {
-  hasNvidiaSmi: boolean;
+  hasGpuTool: boolean;
+  gpuBackend: GpuBackend;
   gpus: GpuInfo[];
   error?: string;
 }
