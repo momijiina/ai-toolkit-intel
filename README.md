@@ -1,4 +1,7 @@
 <img width="1097" height="431" alt="image" src="https://github.com/user-attachments/assets/aa492026-555c-4d29-aa17-8c3445152fec" />
+### GPU IDの取得が遅いです
+<img width="842" height="308" alt="スクリーンショット 2026-03-26 222357" src="https://github.com/user-attachments/assets/1d963056-7a1b-498c-a392-016e5936592f" />
+
 
 # 初回環境構築
 clone
