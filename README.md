@@ -2,7 +2,8 @@
 
 <img width="842" height="308" alt="スクリーンショット 2026-03-26 222357" src="https://github.com/user-attachments/assets/1d963056-7a1b-498c-a392-016e5936592f" />
 
-Ponyだけ動作確認しました　あとは知らないです
+Ponyだけ動作確認しました<br/>
+あとは知らないです
 <img width="1038" height="614" alt="image" src="https://github.com/user-attachments/assets/d9860def-92d8-4eec-909e-5284ac46b68b" />
 
 
