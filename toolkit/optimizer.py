@@ -61,18 +61,33 @@ def get_optimizer(
 
         optimizer = Adam8bit(params, lr=learning_rate, eps=1e-6, decouple=True, **optimizer_params)
     elif lower_type.endswith("8bit"):
-        import bitsandbytes
+        try:
+            import bitsandbytes
 
-        if lower_type == "adam8bit":
-            return bitsandbytes.optim.Adam8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
-        if lower_type == "ademamix8bit":
-            return bitsandbytes.optim.AdEMAMix8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
-        elif lower_type == "adamw8bit":
-            return bitsandbytes.optim.AdamW8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
-        elif lower_type == "lion8bit":
-            return bitsandbytes.optim.Lion8bit(params, lr=learning_rate, **optimizer_params)
-        else:
-            raise ValueError(f'Unknown optimizer type {optimizer_type}')
+            if lower_type == "adam8bit":
+                return bitsandbytes.optim.Adam8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
+            if lower_type == "ademamix8bit":
+                return bitsandbytes.optim.AdEMAMix8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
+            elif lower_type == "adamw8bit":
+                return bitsandbytes.optim.AdamW8bit(params, lr=learning_rate, eps=1e-6, **optimizer_params)
+            elif lower_type == "lion8bit":
+                return bitsandbytes.optim.Lion8bit(params, lr=learning_rate, **optimizer_params)
+            else:
+                raise ValueError(f'Unknown optimizer type {optimizer_type}')
+        except ImportError:
+            # bitsandbytes is NVIDIA-only; fall back to custom 8bit implementation
+            from toolkit.optimizers.adam8bit import Adam8bit
+            if lower_type in ("adam8bit", "adamw8bit"):
+                decouple = lower_type == "adamw8bit"
+                print(f"WARNING: bitsandbytes is not available (NVIDIA-only). "
+                      f"Falling back to built-in Adam8bit (decouple={decouple}).")
+                return Adam8bit(params, lr=learning_rate, eps=1e-6, decouple=decouple, **optimizer_params)
+            else:
+                raise ImportError(
+                    f"Optimizer '{optimizer_type}' requires bitsandbytes which is not installed. "
+                    f"bitsandbytes only supports NVIDIA GPUs. "
+                    f"Use 'adamw', 'adamw8bit' (built-in fallback), or 'adafactor' instead."
+                )
     elif lower_type == 'adam':
         optimizer = torch.optim.Adam(params, lr=float(learning_rate), eps=1e-6, **optimizer_params)
     elif lower_type == 'adamw':

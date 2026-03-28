@@ -1,11 +1,12 @@
 'use client';
 
-import { GPUApiResponse, GpuInfo } from '@/types';
+import { GPUApiResponse, GpuBackend, GpuInfo } from '@/types';
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/utils/api';
 
 export default function useGPUInfo(gpuIds: null | number[] = null, reloadInterval: null | number = null) {
   const [gpuList, setGpuList] = useState<GpuInfo[]>([]);
+  const [gpuBackend, setGpuBackend] = useState<GpuBackend>('none');
   const [isGPUInfoLoaded, setIsLoaded] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -18,6 +19,7 @@ export default function useGPUInfo(gpuIds: null | number[] = null, reloadInterva
         gpus = gpus.filter(gpu => gpuIds.includes(gpu.index));
       }
       setGpuList(gpus);
+      setGpuBackend(data.gpuBackend);
       setStatus('success');
     } catch (err) {
       console.error(`Failed to fetch GPU data: ${err instanceof Error ? err.message : String(err)}`);
@@ -44,5 +46,5 @@ export default function useGPUInfo(gpuIds: null | number[] = null, reloadInterva
     }
   }, [gpuIds, reloadInterval]); // Added dependencies
 
-  return { gpuList, setGpuList, isGPUInfoLoaded, status, refreshGpuInfo: fetchGpuInfo };
+  return { gpuList, setGpuList, gpuBackend, isGPUInfoLoaded, status, refreshGpuInfo: fetchGpuInfo };
 }

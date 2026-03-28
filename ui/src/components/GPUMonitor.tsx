@@ -38,8 +38,8 @@ const GpuMonitor: React.FC = () => {
     // Fetch immediately on component mount
     fetchGpuInfo();
 
-    // Set up interval to fetch every 1 seconds
-    const intervalId = setInterval(fetchGpuInfo, 1000);
+    // Set up interval to fetch every 5 seconds
+    const intervalId = setInterval(fetchGpuInfo, 5000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);

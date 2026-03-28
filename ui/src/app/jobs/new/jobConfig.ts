@@ -69,7 +69,7 @@ export const defaultJobConfig: JobConfig = {
           train_text_encoder: false,
           gradient_checkpointing: true,
           noise_scheduler: 'flowmatch',
-          optimizer: 'adamw8bit',
+          optimizer: 'adamw',
           timestep_type: 'sigmoid',
           content_or_style: 'balanced',
           optimizer_params: {
